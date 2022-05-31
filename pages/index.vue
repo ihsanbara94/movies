@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navigation />
+    <Navigation @navClick="resetFunc()" />
     <div class="flex my-0 mx-auto px-0 py-3 max-w-[1140px] justify-center">
       <div class="px-4 block space-y-3 justify-start w-1/4">
         <p>Search</p>
@@ -127,7 +127,7 @@ export default {
           this.setEndpointParam(this.sortBy, this.year, this.filterGenreById)
         )
         .then((res) => {
-          this.Movies = res.data.results;
+          this.Movies = [...this.Movies, ...res.data.results];
         })
         .catch((err) => {
           console.log(err);
@@ -153,7 +153,7 @@ export default {
     executeFilter() {
       this.useFilter = true;
       if (this.year || this.filterGenreById || this.sortBy) {
-        this.Movies.value = [];
+        this.Movies = [];
         this.getDataMovies();
       }
     },
@@ -224,8 +224,16 @@ export default {
     },
     getResult() {
       this.useFilter = false;
-      // this.page = 1;
+      this.page = 1;
       this.Movies = [];
+      this.getDataMovies();
+    },
+    resetFunc() {
+      this.page = 1;
+      this.useFilter = false;
+      this.Movies = [];
+      this.searchKey = "";
+      this.year = "";
       this.getDataMovies();
     },
   },

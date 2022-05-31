@@ -9,7 +9,7 @@
             class="px-3 py-2 rounded-md text-sm font-medium leading-5 text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
             to="/"
           >
-            SEMOVIES
+            <p @click="$emit('navClick')">SEMOVIES</p>
           </NuxtLink>
         </div>
         <div
