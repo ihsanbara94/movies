@@ -84,7 +84,7 @@ export default {
 
 .content-dropdown {
   transform-origin: top right;
-  position: absolute;
+  /* position: absolute; */
   left: 0;
   width: 100%;
   background-color: white;
