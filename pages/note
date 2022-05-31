@@ -1,0 +1,114 @@
+// getDataMovies() {
+//       axios
+//         .get(
+//           `https://api.themoviedb.org/3/movie/now_playing?api_key=${this.apiKey}&page=${this.page}`
+//         )
+//         .then((res) => {
+//           this.Movies = [...this.Movies, ...res.data.results];
+//           // console.log(res.data.results);
+//         })
+//         .catch((err) => {
+//           console.log(err);
+//         });
+//     },
+
+// getSearchMovie() {
+//   axios
+//     .get(
+//       `https://api.themoviedb.org/3/search/multi?api_key=${this.apiKey}&query=${this.searchKey}&page=${this.page}`
+//     )
+//     .then((res) => {
+//       this.Search = res.data.results;
+//       console.log(res.data.results);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// },
+
+// setEndpointParam = (val) => {
+//   let { sortBy, page, year, filterYear, filterGenreById } = val
+//   if (!useFilter.value) {
+//     let url = searchKey.value == '' ?
+//       `${urlDiscover}?api_key=${apiKey}&language=en-US&sort_by=${sortBy}&page=${page}&release_date.gte=${year}`
+//       :
+//       `${urlSearch}?api_key=${apiKey}&query=${searchKey.value}&page=${page}`
+//     return url
+//   }
+//   else {
+//     let url = `${urlDiscover}?api_key=${apiKey}&language=en-US&page=${page}`
+//     filterYear && (url += `&primary_release_year=${filterYear}`)
+//     filterGenreById && (url += `&with_genres=${filterGenreById}`)
+//     sortBy && (url += `&sort_by=${sortBy}`)
+//     return url
+//   }
+// }
+
+// getDataMovies() {
+//   try {
+//     const res = axios.get(this.setEndpointParam());
+//     res.data.results.forEach((e) => {
+//       this.Movies.push(e);
+//     });
+//   } catch (err) {
+//     console.log(err);
+//   }
+// }
+
+// let url = `${this.urlDiscover}?api_key=${this.apiKey}&language=en-US&page=${this.page}&primary_release_year=${this.year}&sort_by=popularity.desc`;
+// "https://api.themoviedb.org/3/discover/movie?api_key=eb9ff522676fd1e57fbd5f7ebd4fe38d&language=en-US&page=1&primary_release_year=2021&with_genres=16&sort_by=release_date.desc"
+
+// chooseFilterSort(param) {
+//   console.log(param);
+//   if (param === "Popularity") {
+//     this.search = this.search.sort(
+//       (a, b) =>
+//         parseInt(a.createdAt.split("-").join("")) -
+//         parseInt(b.createdAt.split("-").join(""))
+//     );
+//   } else if (param === "Release Date") {
+//     this.search = this.search.sort(
+//       (a, b) =>
+//         parseInt(b.createdAt.split("-").join("")) -
+//         parseInt(a.createdAt.split("-").join(""))
+//     );
+//   } else if (param === "Revenue") {
+//     this.search = this.search.sort(
+//       (a, b) =>
+//         parseInt(b.createdAt.split("-").join("")) -
+//         parseInt(a.createdAt.split("-").join(""))
+//     );
+//   } else if (param === "Most Vote") {
+//     this.search = this.search.sort(
+//       (a, b) =>
+//         parseInt(b.createdAt.split("-").join("")) -
+//         parseInt(a.createdAt.split("-").join(""))
+//     );
+//   } else {
+//     console.log(param);
+//   }
+// }
+
+//stackoverflow.com/questions/69478674/in-react-js-tmdb-api-returns-the-same-data
+
+// https: listDropdownGenre: [
+//   "Action",
+//   "Adventure",
+//   "Animation",
+//   "Comedy",
+//   "Crime",
+//   "Documentary",
+//   "Drama",
+//   "Family",
+//   "Fantasy",
+//   "History",
+//   "Horror",
+//   "Music",
+//   "Mystery",
+//   "Romance",
+//   "Science Fiction",
+//   "TV Movie",
+//   "Thriller",
+//   "War",
+//   "Western",
+// ];
