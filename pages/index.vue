@@ -88,15 +88,18 @@ export default {
       listDropdownGenre: ["Ascending", "Descending"],
       filterSort: "E.g. Popularity ",
       isOpenFilterSort: false,
-      listDropdownSort: ["ihsan", "BB"],
+      listDropdownSort: ["Popularity", "Release Date"],
       searchKey: "",
       useFilter: false,
+      urlDiscover: "https://api.themoviedb.org/3/discover/movie",
+      urlSearch: "https://api.themoviedb.org/3/search/movie",
+      sortBy: "popularity.desc",
+      year: "2020",
     };
   },
   watch: {
     page() {
       this.getDataMovies();
-      this.getSearchMovie();
     },
   },
   mounted() {
@@ -105,31 +108,34 @@ export default {
   methods: {
     getDataMovies() {
       axios
-        .get(
-          `https://api.themoviedb.org/3/movie/now_playing?api_key=${this.apiKey}&page=${this.page}`
-        )
+        .get(this.setEndpointParam())
         .then((res) => {
-          this.Movies = [...this.Movies, ...res.data.results];
-          // console.log(res.data.results);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-
-    getSearchMovie() {
-      axios
-        .get(
-          `https://api.themoviedb.org/3/search/multi?api_key=${this.apiKey}&query=${this.searchKey}&page=${this.page}`
-        )
-        .then((res) => {
-          this.Search = res.data.results;
+          this.Movies = res.data.results;
           console.log(res.data.results);
         })
         .catch((err) => {
           console.log(err);
         });
     },
+
+    setEndpointParam() {
+      // let { sortBy, page, year, filterYear, filterGenreById } = val;
+      if (!this.useFilter) {
+        let url =
+          this.searchKey == ""
+            ? `${this.urlDiscover}?api_key=${this.apiKey}&language=en-US&sort_by=${this.sortBy}&page=${this.page}&release_date.gte=${this.year}`
+            : `${this.urlSearch}?api_key=${this.apiKey}&query=${this.searchKey}&page=${this.page}`;
+        return url;
+      }
+      // else {
+      //   let url = `${this.urlDiscover}?api_key=${this.apiKey}&language=en-US&page=${this.page}`
+      //   filterYear && (url += `&primary_release_year=${filterYear}`)
+      //   filterGenreById && (url += `&with_genres=${filterGenreById}`)
+      //   sortBy && (url += `&sort_by=${this.sortBy}`)
+      //   return url
+      // }
+    },
+
     setPage() {
       this.page += 1;
     },
@@ -161,13 +167,10 @@ export default {
       alert("ihsan");
     },
     getResult() {
-      // state.page = 1
-      // dataMovies.value = []
-      // getDataMovies()
       this.useFilter = false;
       this.page = 1;
       this.Movies = [];
-      this.getSearchMovie();
+      this.getDataMovies();
     },
   },
 };
